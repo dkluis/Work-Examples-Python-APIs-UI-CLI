@@ -260,7 +260,7 @@ def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=F
         rec_ind = 0
         for rec in data:
             if need_id:
-                row = "{" + f' id": {rec_ind},'
+                row = "{" + f'"id": {rec_ind},'
             else:
                 row = "{"
             f_idx = 0
