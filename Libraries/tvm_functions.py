@@ -252,14 +252,19 @@ class operational_mode:
         self.prod = prod
 
 
-def convert_to_dict_within_list(data, data_type='DB', field_list=None):
+def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=False):
     response = ''
     if not field_list:
         field_list = []
     if data_type == 'DB' and len(data) != 0 and len(field_list) == len(data[0]):
+        rec_ind = 0
         for rec in data:
-            row = "{"
+            if need_id:
+                row = "{" + f' id": {rec_ind},'
+            else:
+                row = "{"
             f_idx = 0
+            rec_ind += 1
             for field in rec:
                 row += f'''"{field_list[f_idx]}": "{str(field).replace('"', '~~')}", '''
                 f_idx += 1

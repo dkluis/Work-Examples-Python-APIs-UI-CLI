@@ -40,6 +40,13 @@ def get_shows_followed():
     return result
 
 
+@app.route('/apis/v1/shows/followed/id')
+def get_shows_followed_id():
+    result = execute_sql(sqltype='Fetch', sql=f'select * from shows where status = "Followed"')
+    result = convert_to_dict_within_list(result, data_type='DB', field_list=shows.field_list, need_id=True)
+    return result
+
+
 @app.route('/apis/v1/show/<showid>')
 def get_show_by_id(showid):
     result = execute_sql(sqltype='Fetch', sql=f'select * from shows '
