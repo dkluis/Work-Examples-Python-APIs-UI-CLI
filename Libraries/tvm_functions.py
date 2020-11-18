@@ -252,7 +252,18 @@ class operational_mode:
         self.prod = prod
 
 
-def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=False):
+def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=False, need_json=False):
+    """
+    Routine to convert results to list or json and add the "keys" as well as an "id" if requested
+    
+    :param data:        The data to convert
+    :param data_type:   Indicator if the data comes from a DB select statement
+    :param field_list:  The names of the keys to use for the fields
+    :param need_id:     If the result also needs a sequential id insert before the data
+    :param need_json:   If the result needs to be a pure json or a list of dict
+    :return:
+    """
+    
     response = ''
     if not field_list:
         field_list = []
@@ -269,7 +280,10 @@ def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=F
                 row += f'''"{field_list[f_idx]}": "{str(field).replace('"', '~~')}", '''
                 f_idx += 1
             response = response + row[:-2] + "},"
-        response = "[" + response[:-1] + "]"
+        if not need_json:
+            response = "[" + response[:-1] + "]"
+        else:
+            response = response[:-1]
     else:
         print(f'No result was found')
         return {}
