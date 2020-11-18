@@ -252,7 +252,7 @@ class operational_mode:
         self.prod = prod
 
 
-def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=False, need_json=False):
+def convert_to_dict_within_list(data, data_type='DB', field_list=None, need_id=True, need_json=False):
     """
     Routine to convert results to list or json and add the "keys" as well as an "id" if requested
     
