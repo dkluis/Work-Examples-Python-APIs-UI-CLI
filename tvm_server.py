@@ -8,7 +8,6 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'http://127.0.0.1'
 
-
 @app.route('/apis/v1/shows/page/<page>')
 def get_shows_page(page):
     if int(page) <= 0:
